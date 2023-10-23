@@ -9,11 +9,11 @@ public interface ContactsStorage {
     )
     boolean add(String fullName, String phoneNumber, String email);
     @StorageMethod(value = "print",
-            help = "Displays actual contacts. NOTICE: Contacts might be unsaved."
+            help = "Displays the current list of contacts. ATTENTION. Contacts may be unsaved."
     )
     void printContacts();
     @StorageMethod(value = "save",
-            help = "Saves contacts into output file."
+            help = "Saves contacts to an output file."
     )
     boolean save() throws IOException;
     @StorageMethod(value = "delete",

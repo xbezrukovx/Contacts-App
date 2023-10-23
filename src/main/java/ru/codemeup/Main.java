@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.codemeup.config.GeneralAppConfig;
 import ru.codemeup.storage.ContactsStorage;
+import ru.codemeup.storage.DefaultContactsStorage;
 import ru.codemeup.storage.LoadContactsStorage;
 import ru.codemeup.storage.StorageMethod;
 
@@ -42,7 +43,7 @@ public class Main {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         greetings();
-        if (storage instanceof LoadContactsStorage) System.out.println("Contacts were loaded from file");
+        if (storage instanceof LoadContactsStorage) System.out.println("Contacts were loaded from the file");
         while (true) {
             Method method = getMethod(reader, methods);
             if (method == null) continue;
@@ -56,7 +57,7 @@ public class Main {
         System.out.println("=     Application.Contacts      =");
         System.out.println("=       by Bezrukov Denis       =");
         System.out.println("=================================");
-        System.out.println("Please enter the command \"help\" to see available commands");
+        System.out.println("Please enter the command \"help\" to see a list of available commands");
     }
 
     public static void executeMethod(Method method, Object instance, Object[] params) {
@@ -68,7 +69,9 @@ public class Main {
                 root = e.getCause();
             }
             StackTraceElement cause = stream(root.getStackTrace()).findFirst().get();
-            if (cause.getClassName().equals(LoadContactsStorage.class.getName())) {
+            if (cause.getClassName().equals(LoadContactsStorage.class.getName())
+                    || cause.getClassName().equals(DefaultContactsStorage.class.getName())
+            ) {
                 System.out.println(root.getMessage() + " Try again.");
             } else {
                 throw new RuntimeException(e);
@@ -86,7 +89,7 @@ public class Main {
                 help(methods.values().stream().toList());
                 return null;
             } else if (!methods.containsKey(line)) {
-                System.out.println("The command doesn't exist. Try again.");
+                System.out.println("There is no such command. Please try again.");
                 return null;
             } else {
                 return methods.get(line);
@@ -125,7 +128,7 @@ public class Main {
             String methodHelp = MessageFormat.format("{0} - {1} Input parameters: {2}.",
                     name,
                     help,
-                    params.length() > 0 ? params : "without params"
+                    params.length() > 0 ? params : "without parameters."
             );
             System.out.println(methodHelp);
         }

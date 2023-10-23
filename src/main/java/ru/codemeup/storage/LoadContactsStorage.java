@@ -30,12 +30,12 @@ public class LoadContactsStorage implements ContactsStorage {
         while ((line = br.readLine()) != null) {
             String[] elements = line.split(";");
             if (elements.length != Contact.class.getDeclaredFields().length)
-                throw new IllegalArgumentException("Wrong number of arguments occur while reading contacts file.");
+                throw new IllegalArgumentException("When reading the contacts file, the incorrect number of arguments is encountered.");
             String fullName = elements[0];
             String phoneNumber = elements[1];
             String email = elements[2];
-            if (!isValidPhoneNumber(phoneNumber)) throw new IllegalArgumentException("Incorrect phone number format.");
-            if (!isValidEmail(email)) throw new IllegalArgumentException("Incorrect email format.");
+            if (!isValidPhoneNumber(phoneNumber)) throw new IllegalArgumentException("The phone number format is incorrect.");
+            if (!isValidEmail(email)) throw new IllegalArgumentException("The email format is incorrect.");
             Contact contact = new Contact(fullName, phoneNumber, email);
             contacts.add(contact);
         }
@@ -45,7 +45,7 @@ public class LoadContactsStorage implements ContactsStorage {
     @Override
     public void printContacts() {
         if (contacts.size() == 0) {
-            System.out.println("Contacts list is empty.");
+            System.out.println("The list of contacts is empty.");
         }
         contacts.stream()
                 .map(Contact::toString)
@@ -54,11 +54,11 @@ public class LoadContactsStorage implements ContactsStorage {
 
     @Override
     public boolean add(String fullName, String phoneNumber, String email) throws IllegalArgumentException, NullPointerException {
-        if (!isValidEmail(email)) throw new IllegalArgumentException("Incorrect email format.");
-        if (!isValidEmail(phoneNumber)) throw new IllegalArgumentException("Incorrect phone number format.");
-        if (fullName == null || fullName.isEmpty()) throw new NullPointerException("Full name is null or empty");
+        if (!isValidEmail(email)) throw new IllegalArgumentException("The email format is incorrect.");
+       // if (!isValidEmail(phoneNumber)) throw new IllegalArgumentException("The phone number format is incorrect.");
+        if (fullName == null || fullName.isEmpty()) throw new NullPointerException("The full name is either null or empty.");
         contacts.add(new Contact(fullName, phoneNumber, email));
-        System.out.println(MessageFormat.format("Contact with name {0} was created", fullName));
+        System.out.println(MessageFormat.format("{0} was added as a contact", fullName));
         return true;
     }
 
@@ -69,7 +69,7 @@ public class LoadContactsStorage implements ContactsStorage {
         contactsToDelete.forEach(c -> {
             if (contacts.remove(c)) countDeleted.getAndIncrement();
         });
-        System.out.println(MessageFormat.format("{0} contacts were deleted.",countDeleted));
+        System.out.println(MessageFormat.format("{0} contacts were removed.",countDeleted));
         return true;
     }
 
@@ -81,7 +81,7 @@ public class LoadContactsStorage implements ContactsStorage {
         contacts.forEach(c -> writer.write(c.toStringInFormat() + System.lineSeparator()));
         writer.flush();
         writer.close();
-        System.out.println("File was saved.");
+        System.out.println("The file was saved.");
         return true;
     }
 
