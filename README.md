@@ -1,25 +1,27 @@
 # Contacts App
-The "Contacts" program is a simple console application that manages your contacts.
-
-## Features
+Contacts application is small console application "Contacts" which manage your contacts.
+# ✨ Features
 - Display all available user contacts.
 - Add a new contact to your contact list.
 - Delete a contact by email.
 - Save existing contacts to a file in the following format: "Full name; phone number; email address".
 - Upload a file with contacts
 
-## Tech
-- [Reflection API] - An API that is used to examine or modify the behavior of methods, classes, and interfaces at runtime
-- [Spring Context] - A sub-interface of BeanFactory
+# 🛠️ Technologies
+- Java
+- Reflection API
+- Spring Context 
+- Lombok
 
-## Usage
+# 🚀 Usage
+## Welcome message:
 ![Welcome](https://i.imgur.com/ISo3mFX.png)
-
+## Commands:
+There are possible commands for interacting with the software:
 ```
 help
 ```
 ![Imgur](https://i.imgur.com/1bcJlK2.png)
-There are possible commands for interacting with the software.
 
 ```
 add
@@ -41,3 +43,8 @@ save
 ```
 ![Imgur](https://i.imgur.com/mkHjRgg.png)
 ![Imgur](https://i.imgur.com/5wtQxKL.png)
+# Author
+👤 **Denis Bezrukov**
+- Email: [ds.bezrukov@icloud.com](mailto:ds.bezrukov@icloud.com)
+- Telegram: [@x_bezrukov_x](https://t.me/x_bezrukov_x)
+- Github: [@xbezrukovx](https://github.com/xbezrukovx)
